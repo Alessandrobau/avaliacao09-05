@@ -11,7 +11,26 @@ const criarEstudante = async (dados) => {
     return estudanteCreate;
 }
 
+//listar
+const listarEstudantes = async () => {
+    const listaEstudante = await Estudante.find();
+    return listaEstudante;
+};
+
+//atualização
+const atualizarEstudante = async (id, dados) => {
+    const atualizacaoEstudante = await Estudante.findByIdAndUpdate(id, dados, { new: true });
+    return atualizacaoEstudante;
+};
+
+//remoção
+const deletarEstudante = async (id) => {
+    await Estudante.findByIdAndDelete(id);
+};
 
 export {
-    criarEstudante
+    criarEstudante,
+    listarEstudantes,
+    atualizarEstudante,
+    deletarEstudante
 };
