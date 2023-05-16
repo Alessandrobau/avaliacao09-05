@@ -9,8 +9,11 @@ const schema = new mongoose.Schema({
   biografia: String,
   expertise: String,
   git_hub: String,
-  linkedin: String
-});
+  linkedin: String,
+  email: String,
+  password: String,
+  status: Boolean
+},{ collection: 'professor' });
 
 //cria uma model chamada Users com esse schema passado
 const professor = mongoose.model('professor', schema);

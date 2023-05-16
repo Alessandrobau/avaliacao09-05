@@ -9,8 +9,9 @@ const schema = new mongoose.Schema({
   telefone: String,
   cpf: String,
   email: String,
-  password: String
-});
+  password: String,
+  status: Boolean
+}, { collection: 'estudante' });
 
 //cria uma model chamada Users com esse schema passado
 const estudante = mongoose.model('estudante', schema);

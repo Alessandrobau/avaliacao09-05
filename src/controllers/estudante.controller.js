@@ -4,7 +4,10 @@ import {
     criarEstudante,
     atualizarEstudante,
     deletarEstudante
-} from "../services/estudante.service";
+} from "../services/estudante.service.js";
+
+import authenticationMiddleware from "../middlewares/auth.middleware.js"
+import { estudanteSchema } from "../utils/schemaValidation.js";
 
 const estudanteRoutes = Router();
 
@@ -16,22 +19,22 @@ estudanteRoutes.get("/", async (req, res) => {
 
 //rota pra criar estudante
 estudanteRoutes.post("/", async (req, res) => {
-    // const { error } = await estudanteSchema.validade(req.body);
-    // if (error) {
-    //     throw { status: 401, message: error.message };
-    // }
+    const { error } = await estudanteSchema.validade(req.body);
+    if (error) {
+        throw { status: 401, message: error.message };
+    }
     const estudanteCreated = await criarEstudante(req.body);
 
     return req.status(200).json(estudanteCreated);
 });
 
 //atualizar estudante
-estudanteRoutes.put("/:id", async (req, res) => {
+estudanteRoutes.put("/:id", authenticationMiddleware, async (req, res) => {
     const { id } = req.params;
-    // const { error } = await estudanteSchema.validade(req.body);
-    // if (error) {
-    //     throw { status: 401, message: error.message };
-    // }
+    const { error } = await estudanteSchema.validade(req.body);
+    if (error) {
+        throw { status: 401, message: error.message };
+    }
 
     const estudanteUpdated = await atualizarEstudante(id, req.body);
     return res.status(200).json(estudanteUpdated);
