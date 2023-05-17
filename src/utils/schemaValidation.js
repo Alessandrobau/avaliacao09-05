@@ -6,7 +6,7 @@ const JoiExtended = Joi.extend(JoiDate);
 
 const estudanteSchema = JoiExtended.object({
     nome: JoiExtended.string().required().max(50),
-    image_profile: JoiExtended.string().required().max(50),
+    // image_profile: JoiExtended.string().required().max(50),
     email: JoiExtended.string().email().required().max(50),
     cpf: JoiExtended.string().regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/).required(),
     telefone: JoiExtended.string().regex(/^\d{2}-\d{4,5}-\d{4}$/).required(),
@@ -17,7 +17,7 @@ const estudanteSchema = JoiExtended.object({
 
 const professorSchema = JoiExtended.object({
     nome: JoiExtended.string().required().max(50),
-    image_profile: JoiExtended.string().required().max(50),
+    // image_profile: JoiExtended.string().required().max(50),
     email: JoiExtended.string().email().required().max(50),
     biografia: JoiExtended.string().required().max(50),
     expertise: JoiExtended.string().required().max(50),
@@ -49,7 +49,6 @@ const matriculaSchema = JoiExtended.object({
 
 
 export {
-    userSchema,
     estudanteSchema,
     professorSchema,
     cursoSchema,

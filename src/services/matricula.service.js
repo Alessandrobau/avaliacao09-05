@@ -1,9 +1,14 @@
 import Matricula from "../models/matricula.model.js";
 
 const createMatricula = async (dados) => {
-  const matricula = new Matricula(dados);
-  const result = await matricula.save();
-  return result;
+  dataAtual = new Date();
+  if (matricula.data_matricula != dataAtual) {
+
+  } else {
+    const matricula = new Matricula(dados);
+    const result = await matricula.save();
+    return result;
+  }
 };
 
 const listMatricula = async (id) => {

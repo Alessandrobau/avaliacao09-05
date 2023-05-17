@@ -3,9 +3,8 @@ import mongoose from 'mongoose';
 
 //cria o esquema (schema) a ser adicionado na model
 const schema = new mongoose.Schema({
-  _id: Number,
   nome: String,
-  imagem_perfil: String,
+  // imagem_perfil: String,
   telefone: String,
   cpf: String,
   email: String,

@@ -1,3 +1,4 @@
+import estudanteRoutes from "../controllers/estudante.controller.js";
 import Estudante from "../models/estudante.model.js";
 import { generateJWTToken } from "../utils/jwt.js";
 import bcrypt from "bcrypt";

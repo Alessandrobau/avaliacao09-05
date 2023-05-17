@@ -1,13 +1,12 @@
-import Professor from "../models/professor.model";
 import bcrypt from "bcrypt";
 import { generateJWTToken } from "../utils/jwt.js";
 import Professor from "../models/professor.model.js";
 
 //adicionar
-const adicionarProfessor = async (dados, isProfessor, imagePath) => {
-    if (!isProfessor) {
-        throw { status: 401, message: "Apenas professores podem cadastrar professores." };
-    }
+const adicionarProfessor = async (dados, imagePath) => {
+    // if (!isProfessor) {
+    //     throw { status: 401, message: "Apenas professores podem cadastrar professores." };
+    // }
 
     const { nome, email } = dados;
 
@@ -63,12 +62,12 @@ const deletarProfessor = async (id, isProfessor) => {
 
 //autenticação 
 const authentication = async ({ email, password }) => {
+    console.log(password);
     if (!email || !password) {
         throw { status: 401, message: "Campos faltantes." };
     }
 
     const professor = await Professor.findOne({ email });
-
     const comparePassword = bcrypt.compareSync(password, professor.password);
 
     if (!professor || !comparePassword) {

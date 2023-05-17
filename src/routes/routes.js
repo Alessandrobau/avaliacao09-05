@@ -1,8 +1,8 @@
 import { Router } from "express";
 import estudanteController from "../controllers/estudante.controller.js";
 import matriculaController from "../controllers/matricula.controller.js";
-import professorController from "../models/professor.controller.js";
-import cursoController from "../models/curso.controller.js";
+import professorController from "../controllers/professor.controller.js";
+import cursoController from "../controllers/curso.controller.js";
 
 //habilita o uso de rotas
 const routes = Router();

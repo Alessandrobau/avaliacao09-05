@@ -21,9 +21,8 @@ const jwtConfig = {
 //passamos o payload = dados que queremos guardar do user, não podem ser dados "sensíveis"
 //o segredo via variavel de ambiente
 //e as configurações para criar o JWT
-const generateJWTToken = (payload) => 
+const generateJWTToken = (payload) =>
     jwt.sign(payload, SECRET, jwtConfig);
-
 //aqui criamos uma função para verificar se o token é válido
 //recebemos o token enviado e verificamos se ele existe e é válido
 //isso é feito pela funçõa verify, que recebe o token, o segredo e a configuração
@@ -34,7 +33,7 @@ const authenticateToken = async (token) => {
         throw { status: 401, message: "Sem Token" };
     }
 
-    try{
+    try {
         const introspection = await jwt.verify(token, SECRET, jwtConfig);
         return introspection;
     } catch (e) {
