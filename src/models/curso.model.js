@@ -11,7 +11,8 @@ const schema = new mongoose.Schema({
   valor: String,
   logo: String,
   professor: String,
-});
+  status: Boolean
+}, { collection: 'curso' });
 
 //cria uma model chamada Users com esse schema passado
 const curso = mongoose.model('curso', schema);

@@ -3,45 +3,56 @@ import {
     listarEstudantes,
     criarEstudante,
     atualizarEstudante,
-    deletarEstudante
-} from "../services/estudante.service";
+    deletarEstudante,
+    authentication
+} from "../services/estudante.service.js";
+
+import authenticationMiddleware from "../middlewares/auth.middleware.js"
+import { estudanteSchema } from "../utils/schemaValidation.js";
 
 const estudanteRoutes = Router();
 
 //rota para listar estudantes 
-estudanteRoutes.get("/", async (req, res) => {
+estudanteRoutes.get("/", authenticationMiddleware, async (req, res) => {
     const estudante = await listarEstudantes();
     return res.status(200).json(estudante);
 });
 
 //rota pra criar estudante
 estudanteRoutes.post("/", async (req, res) => {
-    // const { error } = await estudanteSchema.validade(req.body);
-    // if (error) {
-    //     throw { status: 401, message: error.message };
-    // }
+    const { error } = await estudanteSchema.validate(req.body);
+    if (error) {
+        throw { status: 401, message: error.message };
+    }
     const estudanteCreated = await criarEstudante(req.body);
 
-    return req.status(200).json(estudanteCreated);
+    return res.status(200).json(estudanteCreated);
 });
 
 //atualizar estudante
-estudanteRoutes.put("/:id", async (req, res) => {
+estudanteRoutes.put("/:id", authenticationMiddleware, async (req, res) => {
     const { id } = req.params;
-    // const { error } = await estudanteSchema.validade(req.body);
-    // if (error) {
-    //     throw { status: 401, message: error.message };
-    // }
+    const { error } = await estudanteSchema.validate(req.body);
+    if (error) {
+        throw { status: 401, message: error.message };
+    }
 
     const estudanteUpdated = await atualizarEstudante(id, req.body);
     return res.status(200).json(estudanteUpdated);
 });
 
 //deletar estudante
-estudanteRoutes.delete("/:id", async (req, res) => {
+estudanteRoutes.delete("/:id", authenticationMiddleware, async (req, res) => {
     const { id } = req.params;
     const estudanteDeleted = await deletarEstudante(id);
-    return req.status(200).json(estudanteDeleted);
+    return res.status(200).json(estudanteDeleted);
+});
+
+estudanteRoutes.post('/login', async (req, res) => {
+    console.log("to aqui");
+    const token = await authentication(req.body);
+    console.log(token);
+    res.status(200).json(token);
 });
 
 export default estudanteRoutes;
