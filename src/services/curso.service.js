@@ -1,8 +1,14 @@
 import Curso from "../models/curso.model.js"
+import professor from "../models/professor.model.js";
 
 
 //adicionar
 const adicionarCurso = async (dados) => {
+    const existingCurso = await professor.findOne({ $or: [{ cpf }, { nome }, { email }] });
+
+    if (existingCurso) {
+        throw { status: 400, message: "Já existe um professor nesse curso." };
+    }
     console.log(dados);
     const cursoCreate = new Curso(dados);
     await cursoCreate.save();

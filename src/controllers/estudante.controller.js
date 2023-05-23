@@ -49,9 +49,7 @@ estudanteRoutes.delete("/:id", authenticationMiddleware, async (req, res) => {
 });
 
 estudanteRoutes.post('/login', async (req, res) => {
-    console.log("to aqui");
     const token = await authentication(req.body);
-    console.log(token);
     res.status(200).json(token);
 });
 

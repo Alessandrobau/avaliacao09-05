@@ -2,8 +2,8 @@ import Matricula from "../models/matricula.model.js";
 
 const createMatricula = async (dados) => {
   dataAtual = new Date();
-  if (matricula.data_matricula != dataAtual) {
-
+  if (matricula.data_matricula < dataAtual) {
+    console.log("data invalida")
   } else {
     const matricula = new Matricula(dados);
     const result = await matricula.save();

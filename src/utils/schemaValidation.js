@@ -36,7 +36,7 @@ const cursoSchema = JoiExtended.object({
     valor: JoiExtended.number().required().precision(2),
     logo: JoiExtended.string().required().max(50),
     status: JoiExtended.boolean().required(),
-    professor_responsible: JoiExtended.number().required(),
+    professor_responsible: JoiExtended.string().required(),
 });
 
 
